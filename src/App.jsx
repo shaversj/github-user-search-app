@@ -4,12 +4,13 @@ import twitter from "/src/assets/icon-twitter.svg";
 import company from "/src/assets/icon-company.svg";
 import moon from "/src/assets/icon-moon.svg";
 import sun from "/src/assets/icon-sun.svg";
+import search from "/src/assets/icon-search.svg";
 
 function App() {
   return (
     <>
       <div className={"grid min-h-screen place-items-center bg-[#F6F8FF]"}>
-        <div className={"font-SpaceMono max-w-screen-sm"}>
+        <div className={"font-SpaceMono max-w-screen-sm px-6"}>
           <header className={"flex font-bold text-[#222731]"}>
             <h1 className={"text-[26px]"}>devfinder</h1>
             <div className={"ml-auto flex items-center justify-center"}>
@@ -18,14 +19,17 @@ function App() {
             </div>
           </header>
           <main>
-            <div className={"bg-green-50"}>
-              <form>
-                <input type={"text"} />
-                <button></button>
+            <section className={"mt-5 rounded-2xl bg-white py-1.5 pl-3"}>
+              <form className={"flex items-center justify-evenly "}>
+                <img src={search} alt={""} />
+                <input type={"text"} className={"h-[25px] w-[184px] truncate pl-1 text-[13px] text-[#4B6A9B]  placeholder:text-[#4B6A9B]"} placeholder={"Search Github username.."} />
+                <button className={"h-[46px] w-[84px] rounded-xl bg-[#0079ff]"}>
+                  <span className={"text-sm text-white"}>Search</span>
+                </button>
               </form>
-            </div>
+            </section>
 
-            <section className={"bg-white"}>
+            <section className={"mt-5 bg-white"}>
               <svg width="70" height="70" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <circle cx="35" cy="35" r="35" fill="url(#pattern0)" />
                 <defs>
