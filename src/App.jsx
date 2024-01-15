@@ -10,7 +10,7 @@ function App() {
   return (
     <>
       <div className={"grid min-h-screen place-items-center bg-[#F6F8FF]"}>
-        <div className={"font-SpaceMono max-w-screen-sm px-6"}>
+        <div className={"font-SpaceMono max-w-screen-sm px-6 lg:min-w-[730px] lg:px-0"}>
           <header className={"flex"}>
             <h1 className={"text-[26px] font-bold text-[#222731]"}>devfinder</h1>
             <div className={"ml-auto flex items-center justify-center gap-x-4"}>
@@ -19,12 +19,12 @@ function App() {
             </div>
           </header>
           <main>
-            <section className={"mt-9 rounded-2xl bg-white py-1.5 pl-3"}>
-              <form className={"flex items-center justify-evenly "}>
-                <img src={search} alt={""} />
-                <input type={"text"} className={"h-[25px] w-[184px] truncate pl-1 text-[13px] text-[#4B6A9B]  placeholder:text-[#4B6A9B]"} placeholder={"Search Github username.."} />
-                <button className={"h-[46px] w-[84px] rounded-xl bg-[#0079ff]"}>
-                  <span className={"text-sm text-white"}>Search</span>
+            <section className={"mt-9 rounded-2xl bg-white py-1.5 pl-3 lg:pl-8 lg:pr-2.5"}>
+              <form className={"flex items-center justify-evenly lg:justify-start"}>
+                <img className={"pr-6"} src={search} alt={""} />
+                <input type={"text"} className={"h-[25px] w-[184px] truncate text-[13px] text-[#4B6A9B] placeholder:text-[#4B6A9B] lg:w-[254px] lg:text-lg"} placeholder={"Search Github username.."} />
+                <button className={"h-[46px] w-[84px] rounded-xl bg-[#0079ff] lg:ml-auto lg:h-[50px] lg:w-[106px]"}>
+                  <span className={"text-sm font-bold text-white"}>Search</span>
                 </button>
               </form>
             </section>
