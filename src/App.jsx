@@ -5,8 +5,49 @@ import company from "/src/assets/icon-company.svg";
 import moon from "/src/assets/icon-moon.svg";
 import sun from "/src/assets/icon-sun.svg";
 import search from "/src/assets/icon-search.svg";
+import axios from "axios";
+import { useRef, useState } from "react";
 
 function App() {
+  const inputRef = useRef();
+  const [data, setData] = useState({
+    login: "octocat",
+    name: "The Octocat",
+    company: "@github",
+    blog: "https://github.blog",
+    location: "San Francisco",
+    created_at: "2011-01-25T18:44:36Z",
+    bio: null,
+    twitter_username: null,
+    public_repos: 8,
+    public_gists: 8,
+    followers: 11900,
+    following: 9,
+  });
+  const [userName, setUserName] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setUserName(inputRef.current.value);
+    console.log(userName);
+    const getGithubUser = async (e) => {
+      try {
+        const { data: response } = await axios.get("https://api.github.com/users/" + e);
+        setData(response);
+        console.log(response);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+  };
+  const getUser = async (e) => {
+    try {
+      const { data: response } = await axios.get("https://api.github.com/users/" + e);
+      setData(response);
+    } catch (error) {
+      console.error(error);
+    }
+  };
   return (
     <>
       <div className={"grid min-h-screen place-items-center bg-[#F6F8FF]"}>
@@ -20,10 +61,10 @@ function App() {
           </header>
           <main>
             <section className={"mt-9 rounded-2xl bg-white py-1.5 pl-3 lg:pl-8 lg:pr-2.5"}>
-              <form className={"flex items-center justify-evenly lg:justify-start"}>
+              <form className={"flex items-center justify-evenly lg:justify-start"} onSubmit={handleSubmit}>
                 <img className={"pr-6"} src={search} alt={""} />
-                <input type={"text"} className={"h-[25px] w-[184px] truncate text-[13px] text-[#4B6A9B] placeholder:text-[#4B6A9B] lg:w-[254px] lg:text-lg"} placeholder={"Search Github username.."} />
-                <button className={"h-[46px] w-[84px] rounded-xl bg-[#0079ff] lg:ml-auto lg:h-[50px] lg:w-[106px]"}>
+                <input ref={inputRef} className={"h-[25px] w-[184px] truncate text-[13px] text-[#4B6A9B] placeholder:text-[#4B6A9B] lg:w-[254px] lg:text-lg"} placeholder={"Search Github username.."} />
+                <button type={"submit"} className={"h-[46px] w-[84px] rounded-xl bg-[#0079ff] lg:ml-auto lg:h-[50px] lg:w-[106px]"}>
                   <span className={"text-sm font-bold text-white"}>Search</span>
                 </button>
               </form>
@@ -46,10 +87,10 @@ function App() {
               </svg>
               <div className={""}>
                 <div className={"lg:grid lg:grid-cols-2 lg:items-center"}>
-                  <h2 className={"font-bold lg:text-[26px]"}>The Octocat</h2>
-                  <h3 className={"text-[13px] text-[#0079ff] lg:col-start-1 lg:text-base"}>@octocat</h3>
+                  <h2 className={"font-bold lg:text-[26px]"}>{data.name ? data.name : ""}</h2>
+                  <h3 className={"text-[13px] text-[#0079ff] lg:col-start-1 lg:text-base"}>@{data.login}</h3>
                   <div className={"lg:col-start-2 lg:row-start-1 lg:ml-auto"}>
-                    <span className={"text-[13px] text-[#697C9A] lg:text-[15px]"}>Joined 25 Jan 2011</span>
+                    <span className={"text-[13px] text-[#697C9A] lg:text-[15px]"}>Joined {new Date("2011-01-25T18:44:36Z").toLocaleDateString("en-US", { day: "numeric", month: "short", year: "numeric" }).replace(/,/g, "")}</span>
                   </div>
                 </div>
               </div>
@@ -60,34 +101,34 @@ function App() {
                 <div className={"mt-[23px] flex justify-center gap-x-8 rounded-md bg-[#F6F8FF] py-[18px] lg:justify-start lg:gap-x-[100px] lg:pl-[32px]"}>
                   <div>
                     <h4 className={"text-center text-[11px] text-[#4B6A9B] lg:text-[13px]"}>Repos</h4>
-                    <h4 className={"pt-[8px] text-center font-bold text-[#2B3442] lg:pt-[1px] lg:text-start lg:text-[22px]"}>8</h4>
+                    <h4 className={"pt-[8px] text-center font-bold text-[#2B3442] lg:pt-[1px] lg:text-start lg:text-[22px]"}>{data.public_repos}</h4>
                   </div>
                   <div>
                     <h4 className={"text-[11px] text-[#4B6A9B] lg:text-[13px]"}>Followers</h4>
-                    <h4 className={"pt-[8px] text-center font-bold text-[#2B3442] lg:pt-[1px] lg:text-start lg:text-[22px]"}>3938</h4>
+                    <h4 className={"pt-[8px] text-center font-bold text-[#2B3442] lg:pt-[1px] lg:text-start lg:text-[22px]"}>{data.followers}</h4>
                   </div>
                   <div>
                     <h4 className={"text-[11px] text-[#4B6A9B] lg:text-[13px]"}>Following</h4>
-                    <h4 className={"pt-[8px] text-center font-bold text-[#2B3442] lg:pt-[1px] lg:text-start lg:text-[22px]"}>9</h4>
+                    <h4 className={"pt-[8px] text-center font-bold text-[#2B3442] lg:pt-[1px] lg:text-start lg:text-[22px]"}>{data.following}</h4>
                   </div>
                 </div>
 
                 <div className={"pt-6 lg:grid lg:grid-cols-2 lg:place-items-baseline"}>
                   <div className={"flex items-center gap-x-4"}>
                     <img src={location} alt={""} />
-                    <span className={"text-[13px] text-[#4B6A9B]"}>San Francisco</span>
+                    <span className={"text-[13px] text-[#4B6A9B]"}>{data.location}</span>
                   </div>
                   <div className={"flex items-center gap-x-4 pt-4 lg:order-2"}>
                     <img src={website} alt={""} />
-                    <span className={"text-[13px] text-[#4B6A9B] lg:text-[15px]"}>https://github.blog</span>
+                    <span className={"text-[13px] text-[#4B6A9B] lg:text-[15px]"}>{data.blog}</span>
                   </div>
                   <div className={"flex items-center gap-x-4 pt-4"}>
                     <img src={twitter} alt={""} />
-                    <span className={"text-[13px] text-[#4B6A9B] lg:text-[15px]"}>https://github.blog</span>
+                    <span className={"text-[13px] text-[#4B6A9B] lg:text-[15px]"}>@{data.twitter_username}</span>
                   </div>
                   <div className={"flex items-center gap-x-4 pt-4 lg:order-4"}>
                     <img src={company} alt={""} />
-                    <span className={"text-[13px] text-[#4B6A9B] lg:text-[15px]"}>@github</span>
+                    <span className={"text-[13px] text-[#4B6A9B] lg:text-[15px]"}>{data.company}</span>
                   </div>
                 </div>
               </div>
