@@ -26,23 +26,11 @@ function App() {
   });
   const [userName, setUserName] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setUserName(inputRef.current.value);
-    console.log(userName);
-    const getGithubUser = async (e) => {
-      try {
-        const { data: response } = await axios.get("https://api.github.com/users/" + e);
-        setData(response);
-        console.log(response);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-  };
-  const getUser = async (e) => {
     try {
-      const { data: response } = await axios.get("https://api.github.com/users/" + e);
+      console.log(userName);
+      const { data: response } = await axios.get("https://api.github.com/users/" + userName);
       setData(response);
     } catch (error) {
       console.error(error);
@@ -63,7 +51,7 @@ function App() {
             <section className={"mt-9 rounded-2xl bg-white py-1.5 pl-3 lg:pl-8 lg:pr-2.5"}>
               <form className={"flex items-center justify-evenly lg:justify-start"} onSubmit={handleSubmit}>
                 <img className={"pr-6"} src={search} alt={""} />
-                <input ref={inputRef} className={"h-[25px] w-[184px] truncate text-[13px] text-[#4B6A9B] placeholder:text-[#4B6A9B] lg:w-[254px] lg:text-lg"} placeholder={"Search Github username.."} />
+                <input onChange={(e) => setUserName(e.target.value)} className={"h-[25px] w-[184px] truncate text-[13px] text-[#4B6A9B] placeholder:text-[#4B6A9B] lg:w-[254px] lg:text-lg"} placeholder={"Search Github username.."} />
                 <button type={"submit"} className={"h-[46px] w-[84px] rounded-xl bg-[#0079ff] lg:ml-auto lg:h-[50px] lg:w-[106px]"}>
                   <span className={"text-sm font-bold text-white"}>Search</span>
                 </button>
