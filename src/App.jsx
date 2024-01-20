@@ -52,7 +52,7 @@ function App() {
 
           <main>
             <section className={"mt-9 rounded-2xl bg-white py-1.5 pl-3 lg:pl-8 lg:pr-2.5 dark:bg-[#1E2A47]"}>
-              <form className={"flex items-center lg:justify-start"} onSubmit={handleSubmit}>
+              <form className={"flex items-center "} onSubmit={handleSubmit}>
                 <img className={""} src={search} alt={""} />
                 <input
                   type={"text"}
@@ -63,7 +63,7 @@ function App() {
                   placeholder={"Search Github username..."}
                 />
                 <h3 className={"ml-auto hidden font-bold text-[#F74646] lg:flex lg:pl-32"}>{noDataFound ? "No Results" : ""}</h3>
-                <button type={"submit"} className={"ml-auto h-[46px] w-[84px] rounded-xl bg-[#0079ff] hover:bg-[#60ABFF] sm:mr-[7px] lg:ml-auto lg:h-[50px] lg:w-[106px]"}>
+                <button type={"submit"} className={"ml-auto h-[46px] w-[84px] rounded-xl bg-[#0079ff] hover:bg-[#60ABFF] sm:mr-[7px] lg:mr-0 lg:h-[50px] lg:w-[106px]"}>
                   <span className={"text-sm font-bold text-white"}>Search</span>
                 </button>
               </form>
