@@ -51,8 +51,8 @@ function App() {
           </header>
 
           <main>
-            <section className={"mt-9 rounded-2xl bg-white py-1.5 pl-3 lg:pl-8 lg:pr-2.5 dark:bg-[#1E2A47]"}>
-              <form className={"flex items-center "} onSubmit={handleSubmit}>
+            <section className={"mt-9 rounded-2xl bg-white pl-3 lg:pl-8 lg:pr-2.5 dark:bg-[#1E2A47]"}>
+              <form className={"flex h-[60px] items-center lg:h-[69px]"} onSubmit={handleSubmit}>
                 <img className={""} src={search} alt={""} />
                 <input
                   type={"text"}
